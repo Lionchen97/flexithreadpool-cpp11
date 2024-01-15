@@ -1,0 +1,53 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/lion/project/c++14/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec4106387561/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4106387561.dir/build.make CMakeFiles/cmTryCompileExec4106387561.dir/build
+gmake[1]: Entering directory `/home/lion/project/c++14/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lion/project/c++14/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec4106387561.dir/CheckSymbolExists.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec4106387561.dir/CheckSymbolExists.c.o   -c /home/lion/project/c++14/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec4106387561
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4106387561.dir/link.txt --verbose=1
+/usr/bin/gcc       CMakeFiles/cmTryCompileExec4106387561.dir/CheckSymbolExists.c.o  -o cmTryCompileExec4106387561 -rdynamic 
+CMakeFiles/cmTryCompileExec4106387561.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+gmake[1]: Leaving directory `/home/lion/project/c++14/build/CMakeFiles/CMakeTmp'
+gmake[1]: *** [cmTryCompileExec4106387561] Error 1
+gmake: *** [cmTryCompileExec4106387561/fast] Error 2
+
+File /home/lion/project/c++14/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/lion/project/c++14/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3749974182/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3749974182.dir/build.make CMakeFiles/cmTryCompileExec3749974182.dir/build
+gmake[1]: Entering directory `/home/lion/project/c++14/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lion/project/c++14/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3749974182.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec3749974182.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3749974182
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3749974182.dir/link.txt --verbose=1
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec3749974182.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3749974182 -rdynamic -lpthreads 
+/opt/rh/devtoolset-8/root/usr/libexec/gcc/x86_64-redhat-linux/8/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [cmTryCompileExec3749974182] Error 1
+gmake[1]: Leaving directory `/home/lion/project/c++14/build/CMakeFiles/CMakeTmp'
+gmake: *** [cmTryCompileExec3749974182/fast] Error 2
+
+
