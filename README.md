@@ -226,7 +226,7 @@ $ make
 ##### 1). Direct Compilation
 
 ```shell
-$ g++ -o main ./src/*.cpp -pthread -I ./inc -std=c++17
+$ g++ -o main ./src/*.cpp -pthread -I ./inc -std=c++11
 ```
 
 ##### 2). Dynamic Library
@@ -235,7 +235,7 @@ $ g++ -o main ./src/*.cpp -pthread -I ./inc -std=c++17
 
 ```shell
 $ mkdir lib
-$ g++ -shared -fPIC -o lib/libtdpool.so src/threadpool.cpp -Iinc -std=c++17 -pthread
+$ g++ -shared -fPIC -o lib/libtdpool.so src/threadpool.cpp -Iinc -std=c++11 -pthread
 ```
 
 ##### Installing the Library to Standard Location and Updating System Library Cache
@@ -245,7 +245,7 @@ $ g++ -shared -fPIC -o lib/libtdpool.so src/threadpool.cpp -Iinc -std=c++17 -pth
 $ mv libtdpool.so /usr/local/lib
 $ mv ./inc/threadpool.h /usr/local/include/ 
 # 2. Compile
-$ g++ -o main ./src/main.cpp -std=c++17 -ltdpool -lpthread
+$ g++ -o main ./src/main.cpp -std=c++11 -ltdpool -lpthread
 # 3. Add Custom Dynamic Library Path
 $ cd /etc/ld.so.conf.d
  # Create a new configuration file
@@ -260,7 +260,7 @@ $ ldconfig
 
 ```shell
 shellCopy code
-$ g++ -o main src/main.cpp -Iinc -Llib -ltdpool -pthread -std=c++17
+$ g++ -o main src/main.cpp -Iinc -Llib -ltdpool -pthread -std=c++11
 ```
 
 ## Upcoming Upgrades
