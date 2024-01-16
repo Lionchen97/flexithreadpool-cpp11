@@ -263,7 +263,7 @@ shellCopy code
 $ g++ -o main src/main.cpp -Iinc -Llib -ltdpool -pthread -std=c++11
 ```
 
-## Upcoming Upgrades
+## Upcoming Upgrades（Completed）
 
 ### 1. Use packed_task to Encapsulate Tasks for More Convenient Task Submission in the Thread Pool
 
