@@ -269,7 +269,7 @@ $ g++ -o main src/main.cpp -Iinc -Llib -ltdpool -pthread -std=c++11
 
 ### 2. Use future Instead of Result to Simplify Thread Pool Code
 
-**C++20 Version:** [address]https://github.com/Lionchen97/flexithreadpool-cpp20/tree/main
+**C++20 Version:** [address](https://github.com/Lionchen97/flexithreadpool-cpp20/tree/main)
 
 ## Project Output
 
