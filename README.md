@@ -11,7 +11,10 @@ FlexiThreadPool is a highly flexible and feature-rich C++ thread pool library th
 
 ## Operating Environment
 
-C++ Standard: C++11 and above, GNU: 4.5 and above, CMake: 2.8 and above,Operating Systems: Linux/Win
+- C++ Standard: C++11 and above
+- GNU: 4.5 and above
+- CMake: 2.8 and above
+- Operating Systems: Linux/Win
 
 ## Knowledge Background
 
