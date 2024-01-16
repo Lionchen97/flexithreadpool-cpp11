@@ -259,7 +259,7 @@ $ ldconfig
 $ g++ -o main src/main.cpp -Iinc -Llib -ltdpool -pthread -std=c++11
 ```
 
-## 待升级
+## 待升级(已完成)
 
 ### 1. 使用packed_task封装任务，让线程池提交任务更加方便
 
