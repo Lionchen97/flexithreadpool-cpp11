@@ -11,7 +11,10 @@ FlexiThreadPool is a highly flexible and feature-rich C++ thread pool library th
 
 ## Operating Environment
 
-C++ Standard: C++11 and above, GNU: 4.5 and above, CMake: 2.8 and above,Operating Systems: Linux/Win
+- C++ Standard: C++11 and above
+- GNU: 4.5 and above
+- CMake: 2.8 and above
+- Operating Systems: Linux/Win
 
 ## Knowledge Background
 
@@ -263,13 +266,13 @@ shellCopy code
 $ g++ -o main src/main.cpp -Iinc -Llib -ltdpool -pthread -std=c++11
 ```
 
-## Upcoming Upgrades
+## Upcoming Upgrades（Completed）
 
 ### 1. Use packed_task to Encapsulate Tasks for More Convenient Task Submission in the Thread Pool
 
 ### 2. Use future Instead of Result to Simplify Thread Pool Code
 
-**C++20 Version:**
+**C++20 Version:** [address](https://github.com/Lionchen97/flexithreadpool-cpp20/tree/main)
 
 ## Project Output
 

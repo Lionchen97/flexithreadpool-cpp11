@@ -5,7 +5,10 @@
 FlexiThreadPool是一个高度灵活且功能丰富的 C++ 线程池库，它为并发任务处理提供了一个高效、可扩展的解决方案，特别适用于需要处理大量异步任务的场景。用户可以自定义创建线程、管理线程，并让它处理任何你想实现的任务。
 
 ## 运行环境
-C++标准：C++11及以上，GNU：4.5及以上，CMake：2.8及以上，操作系统: Linux/Win
+- C++标准：C++11及以上
+- GNU：4.5及以上
+- CMake：2.8及以上
+- 操作系统: Linux/Win
 
 ## 知识背景
 
@@ -259,13 +262,14 @@ $ ldconfig
 $ g++ -o main src/main.cpp -Iinc -Llib -ltdpool -pthread -std=c++11
 ```
 
-## 待升级
+## 待升级(已完成)
 
 ### 1. 使用packed_task封装任务，让线程池提交任务更加方便
 
 ### 2. 使用future来代替Result节省线程池代码
 
-**C++20 版本：**
+**C++20 版本：**[address](https://github.com/Lionchen97/flexithreadpool-cpp20/tree/main)
+
 
 ## 项目输出
 
