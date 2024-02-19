@@ -1,1 +1,1 @@
-/usr/bin/g++  -fPIC -g   -shared -Wl,-soname,libtdpool.so -o lib/libtdpool.so CMakeFiles/tdpool.dir/src/threadpool.cpp.o 
+/usr/bin/g++ -fPIC -g -shared -Wl,-soname,libtdpool.so -o /home/lion/project/flexithreadpool-cpp11/lib/libtdpool.so CMakeFiles/tdpool.dir/src/threadpool.cpp.o 

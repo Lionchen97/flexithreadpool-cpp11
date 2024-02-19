@@ -8,6 +8,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # 添加可执行文件
 add_executable(main src/main.cpp) 
 
+
+set_target_properties(main PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
+
 # 添加头文件搜索路径
 target_include_directories(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc)
 
@@ -17,7 +20,7 @@ target_include_directories(tdpool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc)
 
 # 设置库的输出路径
 set_target_properties(tdpool PROPERTIES
-                      LIBRARY_OUTPUT_DIRECTORY $ ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+                      LIBRARY_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 # 查找并链接线程库
 find_package(Threads REQUIRED)

@@ -1,1 +1,1 @@
-/usr/bin/g++   -g    CMakeFiles/main.dir/src/main.cpp.o  -o main -rdynamic -lpthread lib/libtdpool.so -pthread -Wl,-rpath,/home/lion/project/c++14/build/lib 
+/usr/bin/g++ -g -rdynamic CMakeFiles/main.dir/src/main.cpp.o -o /home/lion/project/flexithreadpool-cpp11/bin/main  -Wl,-rpath,/home/lion/project/flexithreadpool-cpp11/lib -lpthread /home/lion/project/flexithreadpool-cpp11/lib/libtdpool.so -pthread 

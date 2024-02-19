@@ -1,12 +1,14 @@
 [
 {
-  "directory": "/home/lion/project/c++14/build",
-  "command": "/usr/bin/g++    -g -I/home/lion/project/c++14/inc    -Wall -Wextra -pedantic -o CMakeFiles/main.dir/src/main.cpp.o -c /home/lion/project/c++14/src/main.cpp",
-  "file": "/home/lion/project/c++14/src/main.cpp"
+  "directory": "/home/lion/project/flexithreadpool-cpp11/build",
+  "command": "/usr/bin/g++ -Dtdpool_EXPORTS -I/home/lion/project/flexithreadpool-cpp11/inc -g -std=gnu++11 -fPIC -o CMakeFiles/tdpool.dir/src/threadpool.cpp.o -c /home/lion/project/flexithreadpool-cpp11/src/threadpool.cpp",
+  "file": "/home/lion/project/flexithreadpool-cpp11/src/threadpool.cpp",
+  "output": "CMakeFiles/tdpool.dir/src/threadpool.cpp.o"
 },
 {
-  "directory": "/home/lion/project/c++14/build",
-  "command": "/usr/bin/g++   -Dtdpool_EXPORTS -g -fPIC -I/home/lion/project/c++14/inc    -o CMakeFiles/tdpool.dir/src/threadpool.cpp.o -c /home/lion/project/c++14/src/threadpool.cpp",
-  "file": "/home/lion/project/c++14/src/threadpool.cpp"
+  "directory": "/home/lion/project/flexithreadpool-cpp11/build",
+  "command": "/usr/bin/g++  -I/home/lion/project/flexithreadpool-cpp11/inc -g -std=gnu++11 -Wall -Wextra -pedantic -o CMakeFiles/main.dir/src/main.cpp.o -c /home/lion/project/flexithreadpool-cpp11/src/main.cpp",
+  "file": "/home/lion/project/flexithreadpool-cpp11/src/main.cpp",
+  "output": "CMakeFiles/main.dir/src/main.cpp.o"
 }
 ]
