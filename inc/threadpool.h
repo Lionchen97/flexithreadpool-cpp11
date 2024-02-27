@@ -1,5 +1,5 @@
-// #ifdef THREADPOOL_H
-// #define THREADPOOL_H
+#ifndef THREADPOOL_H
+#define THREADPOOL_H
 #include <vector>
 #include <queue>
 #include <memory>
@@ -161,7 +161,7 @@ public:
     ~Thread();
     // 启动线程
     void start();
-    // h获取线程id
+    // 获取线程id
     size_t getId() const;
 
 private:
@@ -232,3 +232,4 @@ private:
     PoolMode poolMode_;                                           // 当前线程池的工作模式
     std::atomic_bool isPoolRunning_;                              // 表示当前线程池的启动状态
 };
+#endif

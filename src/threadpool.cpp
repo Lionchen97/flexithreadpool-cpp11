@@ -47,10 +47,42 @@ void ThreadPool::setThreadMaxThreshHold(size_t threshhold)
     }
 }
 
+
+// 开启线程池，创建线程，为每个线程分配线程函数。
+void ThreadPool::start(size_t initThreadSize)
+{
+    // 设置线程池的运行状态
+    isPoolRunning_ = true;
+    // 记录初始线程个数
+    initThreadSize_ = initThreadSize;
+    curThreadSize_ = initThreadSize;
+    // 创建线程对象的时候，把线程函数给到thread线程对象
+    for (int i = 0; i < initThreadSize_; i++)
+    {
+        // 创建新线程
+        // auto ptr = std::make_unique<Thread>(std::bind(&ThreadPool::threadHandler, this, std::placeholders::_1)); // C++14
+
+        std::unique_ptr<Thread> ptr(new Thread(std::bind(&ThreadPool::threadHandler, this, std::placeholders::_1))); // c++11
+
+        // std::unique_ptr<Thread> ptr(new Thread(std::bind(&ThreadPool::threadHandler, this))); // C++11
+        size_t threadId = ptr->getId();
+        threads_.emplace(threadId, std::move(ptr));
+        // threads_.emplace_back(std::move(ptr)); //  emplace_back会进行拷贝，而unique_ptr不支持拷贝
+    }
+
+    // 启动所有对象
+    for (int i = 0; i < initThreadSize_; i++)
+    {
+        threads_[i]->start(); // 真正的创建线程，并执行线程函数
+        threadIdelSize_++;    // 记录初始空闲线程的数量
+    }
+}
+
+
 // 给线程池提交任务，用户调用该接口，传入任务对象，生产任务
 Result ThreadPool::submitTask(std::shared_ptr<Task> sp)
 {
-    // 获取锁
+    // 获取锁 任务提交过程可能是多线程的
     std::unique_lock<std::mutex> lock(taskQueMtx_);
     /*
     满足1：线程的通信 等待任务队列有空余
@@ -112,35 +144,6 @@ Result ThreadPool::submitTask(std::shared_ptr<Task> sp)
     return Result(sp); // 调用右值拷贝
 }
 
-// 开启线程池，创建线程，为每个线程分配线程函数。
-void ThreadPool::start(size_t initThreadSize)
-{
-    // 设置线程池的运行状态
-    isPoolRunning_ = true;
-    // 记录初始线程个数
-    initThreadSize_ = initThreadSize;
-    curThreadSize_ = initThreadSize;
-    // 创建线程对象的时候，把线程函数给到thread线程对象
-    for (int i = 0; i < initThreadSize_; i++)
-    {
-        // 创建新线程
-        // auto ptr = std::make_unique<Thread>(std::bind(&ThreadPool::threadHandler, this, std::placeholders::_1)); // C++14
-
-        std::unique_ptr<Thread> ptr(new Thread(std::bind(&ThreadPool::threadHandler, this, std::placeholders::_1))); // c++11
-
-        // std::unique_ptr<Thread> ptr(new Thread(std::bind(&ThreadPool::threadHandler, this))); // C++11
-        size_t threadId = ptr->getId();
-        threads_.emplace(threadId, std::move(ptr));
-        // threads_.emplace_back(std::move(ptr)); //  emplace_back会进行拷贝，而unique_ptr不支持拷贝
-    }
-
-    // 启动所有对象
-    for (int i = 0; i < initThreadSize_; i++)
-    {
-        threads_[i]->start(); // 需要执行一个线程函数
-        threadIdelSize_++;    // 记录初始空闲线程的数量
-    }
-}
 // 定义线程函数
 void ThreadPool::threadHandler(size_t threadid)
 {
@@ -161,6 +164,7 @@ void ThreadPool::threadHandler(size_t threadid)
             std::cout << "tid: " << std::this_thread::get_id() << " try to get the task ..." << std::endl;
             // cached模式下，有可能已经创建了很多的线程，但是空闲时间超过60s，应该回收多余的线程。
             // 当前时间-上次线程执行时间
+            // 任务队列为空
             while (taskQue_.size() == 0)
             {
                 // 线程池结束
@@ -174,12 +178,17 @@ void ThreadPool::threadHandler(size_t threadid)
                 // MODE_CACHED模式：开始回收空闲线程
                 if (poolMode_ == PoolMode::MODE_CACHED)
                 {
-                    // 超时返回
+                   
+                    /*
+                    等待任务，超时返回，
+                    这种等待策略允许线程在等待新任务到来时不会永久阻塞，
+                    特别是对于需要定期检查某些条件（比如是否需要结束线程或回收空闲线程）的场景非常有用。
+                    */ 
                     if (std::cv_status::timeout == notEmpty_.wait_for(lock, std::chrono::seconds(1)))
                     {
                         auto now = std::chrono::high_resolution_clock().now();
                         auto dur = std::chrono::duration_cast<std::chrono::seconds>(now - lastTime);
-                        if (dur.count() >= THREAD_IDLE_TIME && curThreadSize_ > initThreadSize_)
+                        if (dur.count() >= THREAD_IDLE_TIME && curThreadSize_ > initThreadSize_) // 
                         {
                             // 把线程对象从线程列表容器中删除
                             threads_.erase(threadid); // 自己生成的线程id
@@ -210,7 +219,7 @@ void ThreadPool::threadHandler(size_t threadid)
                 //     return; // 结束线程函数，就是结束当前线程。
                 // }
             }
-
+            // 任务队列不为空，执行任务
             threadIdelSize_--;
             std::cout << "tid: " << std::this_thread::get_id() << " got the task.." << std::endl;
             // 从任务队列中取一个任务
@@ -235,6 +244,7 @@ void ThreadPool::threadHandler(size_t threadid)
 
             task->exec();
         }
+        // 任务执行完毕
         threadIdelSize_++;
         lastTime = std::chrono::high_resolution_clock().now(); // 更新线程执行完任务的时间
     }

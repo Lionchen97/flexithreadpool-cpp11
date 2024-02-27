@@ -48,7 +48,21 @@
         "optional": "cpp",
         "random": "cpp",
         "string": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "bit": "cpp",
+        "complex": "cpp",
+        "strstream": "cpp",
+        "bitset": "cpp",
+        "cstring": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "iomanip": "cpp",
+        "cfenv": "cpp",
+        "cinttypes": "cpp",
+        "typeindex": "cpp",
+        "variant": "cpp"
     },
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "commentTranslate.hover.enabled": true
 }
